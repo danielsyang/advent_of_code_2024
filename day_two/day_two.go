@@ -34,7 +34,41 @@ func parse_file(file_path string) [][]int {
 
 func Day_two(file_path string) {
 
-	reports := parse_file(file_path)
+	report := parse_file(file_path)
+	var total = 0
 
-	fmt.Println(reports)
+	for _, levels := range report {
+
+		var is_increasing bool
+		is_valid := true
+
+		for i := range len(levels) - 1 {
+			j := i + 1
+
+			if i == 0 {
+				if levels[i] > levels[j] {
+					is_increasing = true
+				} else {
+					is_increasing = false
+				}
+			}
+
+			if levels[i] > levels[j] && !is_increasing || levels[i] < levels[j] && is_increasing || levels[i] == levels[j] {
+				is_valid = false
+			} else if utils.Abs_int(levels[i]-levels[j]) <= 3 {
+				is_valid = true
+			} else {
+				is_valid = false
+			}
+
+		}
+
+		if is_valid {
+			total++
+		}
+
+	}
+
+	fmt.Println("How many reports are safe?", total)
+
 }
