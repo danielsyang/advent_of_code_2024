@@ -1,27 +1,17 @@
 package day_one
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"slices"
 	"strconv"
+
+	"github.com/danielsyang/go_advent_of_code/utils"
 )
 
 func parse_file(file_path string) (first, last []int) {
 	var first_list []int
 	var last_list []int
-
-	file, err := os.Open(file_path)
-
-	if err != nil {
-		fmt.Println("Can't read filepath:", file_path)
-		panic(err)
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	scanner := utils.Read_file(file_path)
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -53,15 +43,8 @@ func Day_one(file_path string) {
 	slices.Sort(first_list)
 	slices.Sort(second_list)
 
-	fmt.Println(first_list)
-	fmt.Println(second_list)
-
 	for index, value := range first_list {
-		if value > second_list[index] {
-			total += value - second_list[index]
-		} else {
-			total += second_list[index] - value
-		}
+		total += utils.Abs_int(value - second_list[index])
 	}
 
 	fmt.Println("What is the total distance between your lists?", total)

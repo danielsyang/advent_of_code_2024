@@ -1,4 +1,4 @@
-module github.com/danielsyang/go_advent_of_code/day_one
+module github.com/danielsyang/go_advent_of_code/day_two
 
 go 1.24.0
 
