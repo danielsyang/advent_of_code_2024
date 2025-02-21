@@ -45,6 +45,10 @@ func Day_two(file_path string) {
 		for i := range len(levels) - 1 {
 			j := i + 1
 
+			if !is_valid {
+				break
+			}
+
 			if i == 0 {
 				if levels[i] > levels[j] {
 					is_increasing = true
